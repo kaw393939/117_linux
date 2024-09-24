@@ -11,6 +11,7 @@ Class youtube video from friday: https://youtu.be/HCb50wZyZjY
 6.  Go to see the site localhost:3000
 7.  Intall live preview server
 8.  GO make your own version 
+9.  Learn: Git stash, git reset soft and git reset hard for friday
 
 
 1. [Top 10 GIT Commands](git.md)
