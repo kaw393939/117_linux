@@ -3,7 +3,7 @@ Class youtube video from friday: https://youtu.be/HCb50wZyZjY
 
 
 ## Steps to complete:
-1. Setup node version 20
+1. Setup node version 200
 2.  Clone my repo
 3.  run the server npm run start
 4.  Go to see the site localhost:3000
