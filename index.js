@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 
+// instantiation - creating the express object
 const app = express();
 const port = 3000;
 

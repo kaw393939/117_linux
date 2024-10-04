@@ -17,3 +17,26 @@ Class youtube video from friday: https://youtu.be/HCb50wZyZjY
 1. [Top 10 GIT Commands](git.md)
 2. [Top 10 Linux Commands](linux.md)
 
+1. Pre Internet
+    - JC Licklider
+    - Nuclear Weapons
+    - ARPA - Advanced Research Project Agency later called DARPA
+2. Internet
+    - Arpanet
+    - Vint Cerf / Bob Kahn 
+    - find some of the first programs used on arpanet like Gopher 
+
+3. Web 1.0
+    - HTML / HTTP Protocol (HTTP Browser / Server) - Tim Berners Lee
+    - JavaScript
+    - CSS 
+    - Perl & PHP Server 
+    - Linux - Linus Torvulds
+    - Early Search - Altavista and Hotbot
+4. Web 2.0
+    - Google Search - Page Rank
+    - Roy Fielding REST 
+    - Ryan Dahl Node.js / JavaScript
+    - Python Guido van Rossum
+    - GIT Linus Torvulds
+    
