@@ -142,6 +142,7 @@ This outline presents a detailed information architecture for a website covering
 #### 4.2. **Google Search (1998)**  
 - **PageRank Algorithm**  
   - Revolutionized search by ranking pages based on relevance and links.
+  - **Add more info to explain the evolution of the search algorithms and the black hat and white hat techniques used throughout the history to improve a sites ranking in search results.**
   
 #### 4.3. **Web Standards and APIs**
 - **Roy Fielding's REST (Representational State Transfer)**  

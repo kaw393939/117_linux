@@ -95,7 +95,32 @@
       clip: rect(0, 0, 0, 0);
       border: 0;
     }
+
+  .red {
+    color: red;
+  }
+
+  .bold-100 {
+    font-weight: 100;
+  }
+
+  html {
+    background-color: burlywood;
+  }
+
+  .border {
+    border: #000 10px;
+    border-style: solid;
+    border-width: 1px;
+    margin-left: 50px;
+    padding: 20px;
+    position: fixed;
+    top: 0px;
+  }
+
   </style>
+
+
 </head>
 
 <body>
@@ -105,15 +130,15 @@
 
   <!-- The following headings and paragraphs are the structure of the main content. 
        Each heading has an ARIA-compliant structure, meaning it uses clear, descriptive tags to help screen readers understand the document's hierarchy. -->
-  <h1 id="the-browser-wars-a-detailed-history-and-their-impact-on-the-web-in-2024">The Browser Wars: A Detailed History and Their Impact on the Web in 2024</h1>
-  <h2 id="introduction">Introduction</h2>
+  <h1 class="border" id="the-browser-wars-a-detailed-history-and-their-impact-on-the-web-in-2024">The Browser Wars: A Detailed History and Their Impact on the Web in 2024</h1>
+  <h2 class="red" id="introduction">Introduction</h2>
   <p>The "browser wars" describe the intense competition between web browsers, a battle that has significantly shaped the internet as we know it. These battles have been fought over market share, technology standards, user privacy, and control of how we access and interact with the web. The first browser war was fought in the late 1990s, but the competition has evolved and continues to shape the web today in 2024.</p>
 
   <!-- It's good practice to provide alternative text for the screen reader using `aria-hidden` for decorative content or when needed. -->
   <p>The browser wars have influenced not only which browsers people use but also the development of web standards, user privacy policies, and the very architecture of the web itself. This article dives into the history of these browser wars and discusses how they’ve influenced the modern web in 2024.</p>
 
   <!-- Using descriptive heading levels, moving from h2 to h3 ensures that screen readers correctly interpret the structure of content. -->
-  <h2 id="the-first-browser-war-netscape-vs-internet-explorer">The First Browser War: Netscape vs. Internet Explorer</h2>
+  <h2 class="red bold" id="the-first-browser-war-netscape-vs-internet-explorer">The First Browser War: Netscape vs. Internet Explorer</h2>
   <h3 id="early-days-of-the-web">Early Days of the Web</h3>
   <p>The first browser war began in the mid-1990s between <strong>Netscape Navigator</strong> and <strong>Microsoft's Internet Explorer (IE)</strong>. Netscape was the dominant player early on, but Microsoft, recognizing the strategic importance of web access, aggressively pursued browser dominance by bundling Internet Explorer with its Windows operating system. This marked a key moment in the development of the modern internet.</p>
 
