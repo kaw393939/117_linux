@@ -1,228 +1,303 @@
 <!DOCTYPE html>
-<!-- The `<!DOCTYPE html>` declaration defines the document type and version.
-     This is an HTML5 document declaration, and it's important because it helps the browser understand how to interpret the code.
-     Always include this at the top of your HTML files to ensure proper rendering. -->
-
 <html lang="en">
-<!-- The <html> tag represents the root of an HTML document. 
-       The `lang="en"` attribute specifies the language of the document (in this case, English).
-       It's important for accessibility, search engines, and screen readers, as they can use this information to tailor results and better understand the content. -->
 
 <head>
-  <!-- The <head> tag contains metadata and links to resources for the HTML document. 
-         This section does not display any visible content on the page but contains critical information about the document. -->
-
   <meta charset="UTF-8">
-  <!-- The <meta charset="UTF-8"> element defines the character encoding for the document.
-         UTF-8 is a standard character encoding for the web that supports almost all characters, including special symbols, non-English characters, etc.
-         This ensures that the text is displayed correctly in different languages and systems.
-         WATCH THIS VIDEO https://www.youtube.com/watch?v=MijmeoH9LT4
-         -->
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- This <meta> tag controls the viewport, which is especially important for responsive design.
-         `width=device-width` sets the width of the page to the screen's width, making sure it adapts to various screen sizes (like mobile devices).
-         `initial-scale=1.0` sets the initial zoom level when the page is loaded, ensuring it appears correctly scaled on all devices. -->
-
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!-- This <meta> tag ensures that the page is displayed in the highest rendering mode available in Internet Explorer.
-         It helps avoid compatibility issues with older versions of IE, and modern browsers typically ignore it.
-         Though less important today, it's useful for legacy support. 
-         Watch Browser Wars:  https://www.youtube.com/watch?v=M02uZp_tkAc
-         -->
-
-  <title>Current State of Web Broswers and the Browser Wars</title>
-  <!-- The <title> element sets the title of the web page, which appears in the browser's title bar or tab.
-         This title also helps with search engine optimization (SEO), as it summarizes the page content. -->
-
-  <link rel="stylesheet" href="css/main.css">
-  <!-- The <link> tag is used to link external resources to the HTML document.
-         Here, it links an external CSS file located in the `css` folder, called `main.css`.
-         The CSS file contains styling rules that define the look and feel of the page. 
-         This separation of content (HTML) and presentation (CSS) is a best practice in web development. -->
+  <title>Lesson: Web Design, Typography, and the Mathematics of Web Development</title>
 
   <style>
-    /* The `table` selector targets all <table> elements on the page */
-    table {
-      width: 100%;
-      /* Makes the table span the full width of its container */
-      border-collapse: collapse;
-      /* Removes the default space between table cells */
-      margin-top: 20px;
-      /* Adds space above the table */
+    /* CSS VARIABLES (ROOT)
+       ------------------------------------
+       We define variables for font sizes, colors, and spacing for maintainability.
+       Variables help us apply consistent styles across the page and easily make global changes.
+    */
+    :root {
+      --base-font-size: 18px; /* Base font size for the body */
+      --line-height: 1.6; /* Line height for body text */
+      --max-width: 1200px; /* Maximum width of the page content */
+      --primary-color: #333; /* Main text color */
+      --secondary-color: #555; /* Lighter color for secondary text */
+      --heading-margin: 1em; /* Margin for headings */
+      --container-padding: 1.5rem; /* Padding inside containers */
+      --bg-color: #f9f9f9; /* Light background color */
+      --link-color: #007acc; /* Link color */
+      --golden-ratio: 1.618; /* The golden ratio */
     }
 
-    /* The `th, td` selector targets all <th> (table headers) and <td> (table data cells) */
-    th,
-    td {
-      border: 1px solid #000;
-      /* Adds a 1px black border around each cell */
-      padding: 10px;
-      /* Adds 10px of space inside each cell, so text doesn't touch the edges */
-      text-align: left;
-      /* Aligns text to the left within the cells */
+    /* BASE STYLES (BODY)
+       ------------------------------------
+       Here we set the base styles for the page, including font size, line height for readability, and background color.
+       A max-width is set to prevent content from stretching too far on wide screens.
+    */
+    body {
+      font-size: var(--base-font-size);
+      font-family: Arial, sans-serif;
+      line-height: var(--line-height);
+      color: var(--primary-color);
+      background-color: var(--bg-color);
+      margin: 0 auto;
+      padding: var(--container-padding);
+      max-width: var(--max-width); /* Full page width for large screens */
     }
 
-    /* The `th` selector targets only the <th> elements (the table headers) */
-    th {
-      background-color: #f2f2f2;
-      /* Sets a light gray background for the header cells */
+    /* LAYOUT CONTAINER (MAIN)
+       ------------------------------------
+       Flexbox is used to create a two-column layout. We set a gap between columns for visual spacing.
+       On smaller screens, the columns stack vertically, which is explained in the responsive design section.
+    */
+    main {
+      display: flex;
+      gap: 20px; /* Space between the two columns */
     }
 
-    /* The `caption` selector targets the <caption> element, which is the table title */
-    caption {
-      font-size: 1.5em;
-      /* Increases the font size to 1.5 times the default size */
-      margin-bottom: 10px;
-      /* Adds space below the caption, separating it from the table */
+    /* PRIMARY CONTENT COLUMN (ARTICLE)
+       ------------------------------------
+       This column holds the primary content. We give it a background color, padding, and a box-shadow for some visual depth.
+    */
+    .column-1 {
+      flex: 0 0 65%; /* Takes up 65% of the available width */
+      padding: var(--container-padding);
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adds subtle depth */
     }
 
-    /* Adding hover state for better focus/interaction */
-    th:hover,
-    td:hover {
-      background-color: #e2e2e2;
-      /* Slight color change to provide visual feedback */
+    /* SECONDARY CONTENT COLUMN (SIDEBAR)
+       ------------------------------------
+       This column is used for supplementary information or navigation.
+       In this case, it's the table of contents for easy navigation.
+    */
+    .column-2 {
+      flex: 0 0 30%; /* Takes up 30% of the available width */
+      padding: var(--container-padding);
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
-    /* Visually hide but make content accessible to screen readers */
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      border: 0;
+    /* RESPONSIVENESS (MOBILE VIEW)
+       ------------------------------------
+       Media queries let us change the layout based on screen size.
+       When the screen width is smaller than 768px (e.g., on tablets or phones),
+       the two columns stack on top of each other.
+    */
+    @media (max-width: 768px) {
+      main {
+        flex-direction: column; /* Stacks columns vertically on smaller screens */
+      }
+
+      .column-1,
+      .column-2 {
+        flex: 1 0 100%; /* Both columns now take up 100% of the width */
+      }
     }
 
-  .red {
-    color: red;
-  }
+    /* HEADINGS STYLES
+       ------------------------------------
+       Headings should stand out, so we increase the font size and line-height accordingly.
+       We can apply the golden ratio to scale the font sizes proportionally.
+    */
+    h1 {
+      font-size: calc(var(--base-font-size) * 2); /* Larger font for the main heading */
+      line-height: 1.3;
+      margin-bottom: var(--heading-margin);
+    }
 
-  .bold-100 {
-    font-weight: 100;
-  }
+    h2 {
+      font-size: calc(var(--base-font-size) * var(--golden-ratio)); /* Golden ratio scaling for headings */
+      line-height: 1.4;
+      margin-top: var(--heading-margin);
+      margin-bottom: var(--heading-margin);
+    }
 
-  html {
-    background-color: burlywood;
-  }
+    h3 {
+      font-size: calc(var(--base-font-size) * var(--golden-ratio) / 1.5); /* Smaller headings scaled down using the golden ratio */
+      margin-top: var(--heading-margin);
+      margin-bottom: var(--heading-margin);
+    }
 
-  .border {
-    border: #000 10px;
-    border-style: solid;
-    border-width: 1px;
-    margin-left: 50px;
-    padding: 20px;
-    position: fixed;
-    top: 0px;
-  }
+    /* PARAGRAPH STYLES
+       ------------------------------------
+       Line height and color ensure text is readable and easy on the eyes.
+       Margin below paragraphs gives space between blocks of text.
+    */
+    p {
+      font-size: var(--base-font-size);
+      line-height: var(--line-height);
+      margin-bottom: 1.5em;
+      color: var(--secondary-color);
+    }
 
+    /* LINKS
+       ------------------------------------
+       Blue links are commonly recognized as clickable. Hover effects enhance user interaction.
+    */
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* LIST STYLES (FOR NAVIGATION)
+       ------------------------------------
+       Simple list for the table of contents in the sidebar.
+    */
+    nav ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    nav ul li {
+      margin-bottom: 0.75em;
+    }
   </style>
-
-
 </head>
 
 <body>
-  <!-- The <body> tag contains all the visible content of the web page, such as text, images, links, etc.
-         Everything inside the <body> will be rendered by the browser and displayed to the user. -->
-  <h1>Current State of Web Broswers and the Browser Wars</h1>
+  <!-- HEADER: The main title of the page is here. Semantic <header> tags should wrap introductory content. -->
+  <header>
+    <h1>Lesson: Web Design, Typography, and the Mathematics of Web Development</h1>
+    <p><strong>Date:</strong> October 2024</p>
+  </header>
 
-  <!-- The following headings and paragraphs are the structure of the main content. 
-       Each heading has an ARIA-compliant structure, meaning it uses clear, descriptive tags to help screen readers understand the document's hierarchy. -->
-  <h1 class="border" id="the-browser-wars-a-detailed-history-and-their-impact-on-the-web-in-2024">The Browser Wars: A Detailed History and Their Impact on the Web in 2024</h1>
-  <h2 class="red" id="introduction">Introduction</h2>
-  <p>The "browser wars" describe the intense competition between web browsers, a battle that has significantly shaped the internet as we know it. These battles have been fought over market share, technology standards, user privacy, and control of how we access and interact with the web. The first browser war was fought in the late 1990s, but the competition has evolved and continues to shape the web today in 2024.</p>
+  <!-- MAIN CONTENT AREA: Two-column layout using Flexbox -->
+  <main>
+    <!-- PRIMARY CONTENT COLUMN (Main lesson content) -->
+    <article class="column-1">
+      <!-- INTRODUCTION SECTION -->
+      <section id="introduction-to-web-design">
+        <h2>Introduction to Web Design</h2>
+        <p>Welcome to your first lesson in web design! This lesson covers essential concepts you need to build modern, accessible, and responsive web pages. We will focus on semantic HTML, responsive design, accessibility using ARIA, typography, and how mathematical principles like the golden ratio play a role in web design. Understanding these core principles will set you on the path to becoming a skilled web developer.</p>
 
-  <!-- It's good practice to provide alternative text for the screen reader using `aria-hidden` for decorative content or when needed. -->
-  <p>The browser wars have influenced not only which browsers people use but also the development of web standards, user privacy policies, and the very architecture of the web itself. This article dives into the history of these browser wars and discusses how they’ve influenced the modern web in 2024.</p>
+        <p>Good web design is about more than just making something look nice. It's about creating a functional, user-friendly experience for all users, regardless of device or ability. This is where concepts like semantic HTML, responsive design, and accessibility come in.</p>
 
-  <!-- Using descriptive heading levels, moving from h2 to h3 ensures that screen readers correctly interpret the structure of content. -->
-  <h2 class="red bold" id="the-first-browser-war-netscape-vs-internet-explorer">The First Browser War: Netscape vs. Internet Explorer</h2>
-  <h3 id="early-days-of-the-web">Early Days of the Web</h3>
-  <p>The first browser war began in the mid-1990s between <strong>Netscape Navigator</strong> and <strong>Microsoft's Internet Explorer (IE)</strong>. Netscape was the dominant player early on, but Microsoft, recognizing the strategic importance of web access, aggressively pursued browser dominance by bundling Internet Explorer with its Windows operating system. This marked a key moment in the development of the modern internet.</p>
+        <p>By the end of this lesson, you will have a solid understanding of how to structure your HTML correctly, make your pages accessible, and ensure they look good on both large and small screens using mathematical principles to create balance and harmony. Let’s dive into the key topics!</p>
+      </section>
 
-  <h3 id="microsoft-s-dominance">Microsoft’s Dominance</h3>
-  <p>By the late 1990s, Microsoft had achieved near-total dominance, largely due to its bundling strategy, which led to the downfall of Netscape. This was solidified when Microsoft released <strong>Internet Explorer 6 (IE6)</strong> in 2001. IE6's widespread use and lack of support for web standards, however, caused many problems for web developers. It would remain one of the most criticized versions of Internet Explorer due to its proprietary approaches and security vulnerabilities.</p>
+      <!-- SEMANTIC HTML SECTION -->
+      <section id="understanding-semantic-html">
+        <h2>Understanding Semantic HTML</h2>
+        <p>Semantic HTML refers to using HTML elements for their intended purpose. This improves both the readability of the code and the accessibility of your website for users with disabilities. It also helps search engines better understand the structure of your content, which can improve SEO.</p>
 
-  <h3 id="the-end-of-the-first-war">The End of the First War</h3>
-  <p>The first browser war ended in 2003 when <strong>Netscape was effectively defeated</strong>. Internet Explorer had over 90% of the market share, making Microsoft a near-monopoly in the browser space. However, this would soon change.</p>
+        <h3>Why is Semantic HTML Important?</h3>
+        <p>Using the right HTML elements for the right job not only makes your page more accessible but also more maintainable and future-proof. For example, instead of using a generic <code>&lt;div&gt;</code> element to mark up navigation, you should use a <code>&lt;nav&gt;</code> tag, which clearly indicates that this is a section for navigation.</p>
 
-  <!-- Ensure meaningful heading levels and descriptive text for all important sections -->
-  <h2 id="the-second-browser-war-firefox-chrome-and-open-web-standards">The Second Browser War: Firefox, Chrome, and Open Web Standards</h2>
-  <h3 id="firefox-s-emergence">Firefox’s Emergence</h3>
-  <p>In the early 2000s, <strong>Mozilla Firefox</strong> emerged from the ashes of Netscape. Released in 2004, Firefox quickly became a favorite among developers and tech enthusiasts due to its support for web standards, open-source nature, and focus on privacy and security. It also addressed many of the performance and security issues that had plagued Internet Explorer.</p>
+        <p>Some common semantic HTML elements include:</p>
+        <ul>
+          <li><code>&lt;header&gt;</code> - Represents the introductory section of a page.</li>
+          <li><code>&lt;nav&gt;</code> - Used for navigation links.</li>
+          <li><code>&lt;main&gt;</code> - Defines the main content area of a webpage.</li>
+          <li><code>&lt;footer&gt;</code> - Marks the bottom section of the page, often containing site info and links.</li>
+        </ul>
+      </section>
 
-  <h3 id="the-rise-of-google-chrome">The Rise of Google Chrome</h3>
-  <p>In 2008, <strong>Google launched Chrome</strong>, revolutionizing the browser market. Chrome was designed for speed, simplicity, and better security. It introduced the <strong>V8 JavaScript engine</strong>, which significantly improved JavaScript performance, leading to faster-loading web applications. This also encouraged the rise of rich, interactive web applications like Gmail, Google Maps, and other web-based services.</p>
+      <!-- ARIA AND ACCESSIBILITY SECTION -->
+      <section id="aria-and-accessibility">
+        <h2>ARIA and Accessibility</h2>
+        <p>Accessibility is an essential part of web development. Everyone, including people with disabilities, should be able to access and use your website. ARIA (Accessible Rich Internet Applications) helps enhance the accessibility of your site by making dynamic content and user interface components more accessible to assistive technologies like screen readers.</p>
 
-  <!-- Continue with structured heading levels -->
-  <h3 id="modern-browser-landscape">Modern Browser Landscape</h3>
-  <p>Today, Chrome dominates the browser market with a large share, followed by Firefox, Safari, Microsoft Edge, and others. Each of these browsers is built on different engines, including Google’s Blink (used in Chrome and Edge), Mozilla’s Gecko (used in Firefox), and WebKit (used in Safari). These engines continue to push the development of open web standards, ensuring a more accessible and secure internet for all users.</p>
+        <h3>Common ARIA Roles and Attributes</h3>
+        <p>ARIA adds special attributes to HTML elements, improving the experience for users who rely on assistive technologies. Here are some key ARIA roles you should know:</p>
+        <ul>
+          <li><strong>role="banner"</strong> – Defines the header area of a webpage.</li>
+          <li><strong>role="navigation"</strong> – Indicates a navigation region.</li>
+          <li><strong>role="main"</strong> – Marks the primary content area of the page.</li>
+          <li><strong>aria-label</strong> – Adds a label for an element when there isn't a visible label.</li>
+        </ul>
+        <p>Using ARIA attributes correctly improves your site's usability for people with disabilities, and it's often a requirement for compliance with accessibility standards like WCAG (Web Content Accessibility Guidelines).</p>
+      </section>
 
-  <!-- Adding a semantic table with proper accessibility support for screen readers -->
-  <table role="table">
-    <!-- Using `role="table"` for screen readers to announce the table properly -->
-    <caption>JavaScript Engines of Major Web Browsers (Last 5 Years)</caption>
-    <thead>
-      <tr>
-        <th scope="col">Browser</th>
-        <!-- The `scope="col"` attribute helps screen readers identify that this is a header for the following column. -->
-        <th scope="col">JavaScript Engine</th>
-        <th scope="col">Current Version (as of 2023)</th>
-        <th scope="col">Rendering Engine</th>
-        <th scope="col">First Released</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Google Chrome</td>
-        <td>V8</td>
-        <td>117 (Sept 2023)</td>
-        <td>Blink</td>
-        <td>2008</td>
-      </tr>
-      <tr>
-        <td>Mozilla Firefox</td>
-        <td>SpiderMonkey</td>
-        <td>118</td>
-        <td>Gecko</td>
-        <td>2004</td>
-      </tr>
-      <tr>
-        <td>Safari</td>
-        <td>JavaScriptCore</td>
-        <td>17</td>
-        <td>WebKit</td>
-        <td>2003</td>
-      </tr>
-      <tr>
-        <td>Microsoft Edge</td>
-        <td>V8</td>
-        <td>117</td>
-        <td>Blink</td>
-        <td>2015</td>
-      </tr>
-    </tbody>
-  </table>
+      <!-- RESPONSIVE DESIGN SECTION -->
+      <section id="responsive-design">
+        <h2>Responsive Design</h2>
+        <p>Responsive design ensures that your website looks great on all screen sizes—from large desktop monitors to small mobile phones. Instead of creating separate sites for mobile and desktop, you create one site that adapts to different screen sizes.</p>
 
-  <!-- Add meaningful navigation links or any footer content as needed -->
+        <h3>How Does Responsive Design Work?</h3>
+        <p>The core principle behind responsive design is using flexible layouts and media queries. Media queries allow you to apply different styles depending on the screen size.</p>
+
+        <p>In this example, we're using Flexbox for the layout. On larger screens, the content is divided into two columns. However, when the screen size is smaller than 768px (such as on a phone), we change the layout to a single column.</p>
+
+        <pre><code>@media (max-width: 768px) {
+  main {
+    flex-direction: column; /* Stack columns vertically */
+  }
+}</code></pre>
+
+        <p>This media query detects when the screen width is less than 768px and then stacks the columns on top of each other. This ensures that your site is mobile-friendly, meaning it looks good and is easy to navigate on small screens.</p>
+
+        <h3>Best Practices for Responsive Design</h3>
+        <ul>
+          <li>Use relative units like percentages, ems, or rems for widths and spacing instead of fixed pixel values.</li>
+          <li>Design mobile-first by creating layouts for smaller screens first, then enhancing them for larger screens.</li>
+          <li>Test your design on different screen sizes using browser tools or responsive design testing tools.</li>
+        </ul>
+      </section>
+
+      <!-- MATHEMATICS IN WEB DEVELOPMENT SECTION -->
+      <section id="mathematics-in-web-development">
+        <h2>Mathematics in Web Development</h2>
+        <p>Mathematics plays a crucial role in web design, particularly when it comes to layout, spacing, and typography. By using mathematical principles like the golden ratio, you can create visually appealing and well-balanced designs.</p>
+
+        <h3>What is the Golden Ratio?</h3>
+        <p>The golden ratio is a mathematical ratio commonly found in nature and art. It's approximately 1.618, and it has been used by artists, architects, and designers for centuries to create aesthetically pleasing compositions. In web design, the golden ratio can help create a harmonious relationship between elements like text and images.</p>
+
+        <p>The formula for the golden ratio is often expressed as: <strong>A/B = (A+B)/A</strong>, which simplifies to approximately 1.618. This means that the larger part (A) is roughly 1.618 times the size of the smaller part (B).</p>
+
+        <h3>Using the Golden Ratio in Layouts</h3>
+        <p>In web design, you can use the golden ratio to define proportions between elements. For example, if you're designing a two-column layout, one column can be 65% of the width, and the other can be 35% (since 65/35 = 1.618).</p>
+
+        <h3>Applying the Golden Ratio to Typography</h3>
+        <p>Typography can also benefit from the golden ratio. You can scale font sizes proportionally by multiplying the base font size by the golden ratio (1.618). For example, if your base font size is 18px, the next level up (for a heading) would be 18px * 1.618 ≈ 29px. This creates a natural hierarchy that is pleasing to the eye.</p>
+
+        <h3>Other Mathematical Principles in Web Design</h3>
+        <ul>
+          <li><strong>Rule of Thirds:</strong> This principle divides a design into three equal parts horizontally and vertically, helping to place key elements along these lines or intersections for balance and focus.</li>
+          <li><strong>Modular Scales:</strong> These are predetermined sets of values (often based on a ratio like 1.5 or the golden ratio) used to scale font sizes, spacing, or other elements in a harmonious way.</li>
+          <li><strong>Grid Systems:</strong> Grids are used to organize content in a way that is both logical and aesthetically pleasing. Grids often follow a 12-column layout, allowing for flexible design options that still maintain structure.</li>
+        </ul>
+      </section>
+
+      <!-- TYPOGRAPHY SECTION -->
+      <section id="typography-basics">
+        <h2>Typography Basics</h2>
+        <p>Typography plays a critical role in web design. It affects how readable your content is and can influence the overall aesthetic of your site. Good typography helps users easily read and digest information.</p>
+
+        <h3>1. Font Size</h3>
+        <p>A base font size of 16px to 18px is generally recommended for body text. For headings, use a typographic scale where the font size increases as the heading level goes up (e.g., h1 is larger than h2).</p>
+
+        <h3>2. Line Height</h3>
+        <p>Line height controls the space between lines of text. A line height of 1.5 to 1.6 is considered ideal for readability. It gives enough space between lines to avoid overcrowding.</p>
+
+        <h3>3. Font Choices</h3>
+        <p>Stick to web-safe fonts like Arial, Verdana, or Georgia for maximum compatibility across devices. You can also use Google Fonts for more variety, but make sure the fonts you choose are easy to read, especially for longer texts.</p>
+      </section>
+    </article>
+
+    <!-- SECONDARY CONTENT COLUMN (Table of contents) -->
+    <aside class="column-2">
+      <nav aria-label="Table of Contents">
+        <h2>Table of Contents</h2>
+        <ul>
+          <li><a href="#introduction-to-web-design">Introduction to Web Design</a></li>
+          <li><a href="#understanding-semantic-html">Understanding Semantic HTML</a></li>
+          <li><a href="#aria-and-accessibility">ARIA and Accessibility</a></li>
+          <li><a href="#responsive-design">Responsive Design</a></li>
+          <li><a href="#mathematics-in-web-development">Mathematics in Web Development</a></li>
+          <li><a href="#typography-basics">Typography Basics</a></li>
+        </ul>
+      </nav>
+    </aside>
+  </main>
+
+  <!-- FOOTER -->
   <footer>
-    <!-- Providing navigation for users to access specific sections of the document easily -->
-    <nav aria-label="Table of contents">
-      <ul>
-        <li><a href="#introduction">Introduction</a></li>
-        <li><a href="#the-first-browser-war-netscape-vs-internet-explorer">The First Browser War</a></li>
-        <li><a href="#the-second-browser-war-firefox-chrome-and-open-web-standards">The Second Browser War</a></li>
-        <li><a href="#modern-browser-landscape">Modern Browser Landscape</a></li>
-      </ul>
-    </nav>
+    <p>&copy; 2024 Web Design for Beginners. All rights reserved.</p>
   </footer>
-
-  <!-- The <script> tag is used to include JavaScript files or scripts. 
-         Here, it links to the `main.js` file, which is assumed to contain JavaScript code that adds interactivity or other functionalities to the page.
-         This is typically placed just before the closing </body> tag to ensure the HTML is fully loaded before the JavaScript is executed. -->
-  <script src="js/main.js"></script>
 </body>
 
 </html>
