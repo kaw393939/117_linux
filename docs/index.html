@@ -2,9 +2,13 @@
 <html lang="en">
 
 <head>
+  <!-- The <meta charset="UTF-8"> element ensures that your page can handle special characters, like symbols or non-English text -->
   <meta charset="UTF-8">
+  <!-- The <meta name="viewport"> tag controls how the page appears on different devices. Setting "width=device-width" ensures the page uses the full width of the device screen -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- The <meta http-equiv="X-UA-Compatible"> helps with older versions of Internet Explorer, telling it to use the latest version of the rendering engine -->
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- The <title> element gives the page a title, which will appear in the browser tab -->
   <title>Lesson: Web Design, Typography, and the Mathematics of Web Development</title>
 
   <style>
@@ -23,13 +27,13 @@
       --container-padding: 1.5rem; /* Padding inside containers */
       --bg-color: #f9f9f9; /* Light background color */
       --link-color: #007acc; /* Link color */
-      --golden-ratio: 1.618; /* The golden ratio */
+      --golden-ratio: 1.618; /* The golden ratio, used to scale elements harmoniously */
     }
 
     /* BASE STYLES (BODY)
        ------------------------------------
-       Here we set the base styles for the page, including font size, line height for readability, and background color.
-       A max-width is set to prevent content from stretching too far on wide screens.
+       These are the base styles for the page, including font size, line height for readability, and background color.
+       The max-width keeps the content from stretching too far on wide screens, and padding adds some space around the edges.
     */
     body {
       font-size: var(--base-font-size);
@@ -39,13 +43,13 @@
       background-color: var(--bg-color);
       margin: 0 auto;
       padding: var(--container-padding);
-      max-width: var(--max-width); /* Full page width for large screens */
+      max-width: var(--max-width); /* Maximum page width for large screens */
     }
 
     /* LAYOUT CONTAINER (MAIN)
        ------------------------------------
-       Flexbox is used to create a two-column layout. We set a gap between columns for visual spacing.
-       On smaller screens, the columns stack vertically, which is explained in the responsive design section.
+       Flexbox is used here to create a two-column layout. We add a gap between the columns for visual separation.
+       Flexbox makes it easy to create layouts that adjust as the screen size changes.
     */
     main {
       display: flex;
@@ -54,23 +58,24 @@
 
     /* PRIMARY CONTENT COLUMN (ARTICLE)
        ------------------------------------
-       This column holds the primary content. We give it a background color, padding, and a box-shadow for some visual depth.
+       This is the main content area. It takes up 65% of the screen width, with padding for spacing inside,
+       a white background, and a shadow for depth. Flexbox is used to control the width.
     */
     .column-1 {
-      flex: 0 0 65%; /* Takes up 65% of the available width */
+      flex: 0 0 65%; /* Column takes up 65% of the available width */
       padding: var(--container-padding);
       background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adds subtle depth */
+      border-radius: 8px; /* Rounds the corners for a softer look */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow to create visual depth */
     }
 
     /* SECONDARY CONTENT COLUMN (SIDEBAR)
        ------------------------------------
-       This column is used for supplementary information or navigation.
-       In this case, it's the table of contents for easy navigation.
+       This column is used for the table of contents or additional navigation.
+       It takes up 30% of the screen width and follows the same padding, background, and shadow as the primary content column.
     */
     .column-2 {
-      flex: 0 0 30%; /* Takes up 30% of the available width */
+      flex: 0 0 30%; /* Column takes up 30% of the available width */
       padding: var(--container-padding);
       background-color: white;
       border-radius: 8px;
@@ -81,32 +86,32 @@
        ------------------------------------
        Media queries let us change the layout based on screen size.
        When the screen width is smaller than 768px (e.g., on tablets or phones),
-       the two columns stack on top of each other.
+       the two columns stack on top of each other to make the content easier to read on smaller screens.
     */
     @media (max-width: 768px) {
       main {
-        flex-direction: column; /* Stacks columns vertically on smaller screens */
+        flex-direction: column; /* Stack the two columns vertically */
       }
 
       .column-1,
       .column-2 {
-        flex: 1 0 100%; /* Both columns now take up 100% of the width */
+        flex: 1 0 100%; /* Each column now takes up the full width */
       }
     }
 
     /* HEADINGS STYLES
        ------------------------------------
-       Headings should stand out, so we increase the font size and line-height accordingly.
-       We can apply the golden ratio to scale the font sizes proportionally.
+       Headings should stand out, so we use larger font sizes and adjust line heights.
+       The golden ratio is applied here to scale the font sizes proportionally and create visual harmony.
     */
     h1 {
-      font-size: calc(var(--base-font-size) * 2); /* Larger font for the main heading */
+      font-size: calc(var(--base-font-size) * 2); /* Main heading with a larger font size */
       line-height: 1.3;
-      margin-bottom: var(--heading-margin);
+      margin-bottom: var(--heading-margin); /* Adds margin below the heading for spacing */
     }
 
     h2 {
-      font-size: calc(var(--base-font-size) * var(--golden-ratio)); /* Golden ratio scaling for headings */
+      font-size: calc(var(--base-font-size) * var(--golden-ratio)); /* Scales heading using the golden ratio */
       line-height: 1.4;
       margin-top: var(--heading-margin);
       margin-bottom: var(--heading-margin);
@@ -120,19 +125,19 @@
 
     /* PARAGRAPH STYLES
        ------------------------------------
-       Line height and color ensure text is readable and easy on the eyes.
-       Margin below paragraphs gives space between blocks of text.
+       Paragraphs are styled for readability, with appropriate line height and color.
+       Margins below the paragraph provide space between blocks of text.
     */
     p {
       font-size: var(--base-font-size);
       line-height: var(--line-height);
-      margin-bottom: 1.5em;
-      color: var(--secondary-color);
+      margin-bottom: 1.5em; /* Adds space between paragraphs */
+      color: var(--secondary-color); /* A lighter color for text for a softer look */
     }
 
     /* LINKS
        ------------------------------------
-       Blue links are commonly recognized as clickable. Hover effects enhance user interaction.
+       Links are styled in a recognizable blue color, and a hover effect is added to underline the link when hovered over.
     */
     a {
       color: var(--link-color);
@@ -140,20 +145,20 @@
     }
 
     a:hover {
-      text-decoration: underline;
+      text-decoration: underline; /* Underlines the link on hover to indicate interactivity */
     }
 
     /* LIST STYLES (FOR NAVIGATION)
        ------------------------------------
-       Simple list for the table of contents in the sidebar.
+       Unordered lists are used for the table of contents. We remove the default bullets and add margin between list items.
     */
     nav ul {
-      list-style-type: none;
-      padding-left: 0;
+      list-style-type: none; /* Removes bullet points from the list */
+      padding-left: 0; /* Removes default padding */
     }
 
     nav ul li {
-      margin-bottom: 0.75em;
+      margin-bottom: 0.75em; /* Adds spacing between list items */
     }
   </style>
 </head>
@@ -294,7 +299,7 @@
     </aside>
   </main>
 
-  <!-- FOOTER -->
+  <!-- FOOTER: Closing information for the page -->
   <footer>
     <p>&copy; 2024 Web Design for Beginners. All rights reserved.</p>
   </footer>
