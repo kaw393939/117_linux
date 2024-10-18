@@ -2,307 +2,348 @@
 <html lang="en">
 
 <head>
-  <!-- The <meta charset="UTF-8"> element ensures that your page can handle special characters, like symbols or non-English text -->
-  <meta charset="UTF-8">
-  <!-- The <meta name="viewport"> tag controls how the page appears on different devices. Setting "width=device-width" ensures the page uses the full width of the device screen -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- The <meta http-equiv="X-UA-Compatible"> helps with older versions of Internet Explorer, telling it to use the latest version of the rendering engine -->
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!-- The <title> element gives the page a title, which will appear in the browser tab -->
-  <title>Lesson: Web Design, Typography, and the Mathematics of Web Development</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson: Web Design, Typography, and the Mathematics of Web Development</title>
+    
+    <!-- Font Awesome Integration -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-  <style>
-    /* CSS VARIABLES (ROOT)
-       ------------------------------------
-       We define variables for font sizes, colors, and spacing for maintainability.
-       Variables help us apply consistent styles across the page and easily make global changes.
-    */
-    :root {
-      --base-font-size: 18px; /* Base font size for the body */
-      --line-height: 1.6; /* Line height for body text */
-      --max-width: 1200px; /* Maximum width of the page content */
-      --primary-color: #333; /* Main text color */
-      --secondary-color: #555; /* Lighter color for secondary text */
-      --heading-margin: 1em; /* Margin for headings */
-      --container-padding: 1.5rem; /* Padding inside containers */
-      --bg-color: #f9f9f9; /* Light background color */
-      --link-color: #007acc; /* Link color */
-      --golden-ratio: 1.618; /* The golden ratio, used to scale elements harmoniously */
-    }
+    <style>
+        :root {
+            --base-font-size: 18px;
+            --line-height: 1.6;
+            --max-width: 1200px;
+            --primary-color: #333;
+            --secondary-color: #555;
+            --heading-margin: 1em;
+            --container-padding: 1.5rem;
+            --bg-color: #f9f9f9;
+            --link-color: #007acc;
+            --golden-ratio: 1.618;
+        }
 
-    /* BASE STYLES (BODY)
-       ------------------------------------
-       These are the base styles for the page, including font size, line height for readability, and background color.
-       The max-width keeps the content from stretching too far on wide screens, and padding adds some space around the edges.
-    */
-    body {
-      font-size: var(--base-font-size);
-      font-family: Arial, sans-serif;
-      line-height: var(--line-height);
-      color: var(--primary-color);
-      background-color: var(--bg-color);
-      margin: 0 auto;
-      padding: var(--container-padding);
-      max-width: var(--max-width); /* Maximum page width for large screens */
-    }
+        body {
+            font-size: var(--base-font-size);
+            font-family: Arial, sans-serif;
+            line-height: var(--line-height);
+            color: var(--primary-color);
+            background-color: var(--bg-color);
+            margin: 0 auto;
+            padding: var(--container-padding);
+            max-width: var(--max-width);
+        }
 
-    /* LAYOUT CONTAINER (MAIN)
-       ------------------------------------
-       Flexbox is used here to create a two-column layout. We add a gap between the columns for visual separation.
-       Flexbox makes it easy to create layouts that adjust as the screen size changes.
-    */
-    main {
-      display: flex;
-      gap: 20px; /* Space between the two columns */
-    }
+        main {
+            display: flex;
+            gap: 20px;
+        }
 
-    /* PRIMARY CONTENT COLUMN (ARTICLE)
-       ------------------------------------
-       This is the main content area. It takes up 65% of the screen width, with padding for spacing inside,
-       a white background, and a shadow for depth. Flexbox is used to control the width.
-    */
-    .column-1 {
-      flex: 0 0 65%; /* Column takes up 65% of the available width */
-      padding: var(--container-padding);
-      background-color: white;
-      border-radius: 8px; /* Rounds the corners for a softer look */
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow to create visual depth */
-    }
+        .column-1 {
+            flex: 0 0 65%;
+            padding: var(--container-padding);
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
 
-    /* SECONDARY CONTENT COLUMN (SIDEBAR)
-       ------------------------------------
-       This column is used for the table of contents or additional navigation.
-       It takes up 30% of the screen width and follows the same padding, background, and shadow as the primary content column.
-    */
-    .column-2 {
-      flex: 0 0 30%; /* Column takes up 30% of the available width */
-      padding: var(--container-padding);
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
+        .column-2 {
+            flex: 0 0 30%;
+            padding: var(--container-padding);
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
 
-    /* RESPONSIVENESS (MOBILE VIEW)
-       ------------------------------------
-       Media queries let us change the layout based on screen size.
-       When the screen width is smaller than 768px (e.g., on tablets or phones),
-       the two columns stack on top of each other to make the content easier to read on smaller screens.
-    */
-    @media (max-width: 768px) {
-      main {
-        flex-direction: column; /* Stack the two columns vertically */
-      }
+        @media (max-width: 768px) {
+            main {
+                flex-direction: column-reverse;
+            }
 
-      .column-1,
-      .column-2 {
-        flex: 1 0 100%; /* Each column now takes up the full width */
-      }
-    }
+            .column-1,
+            .column-2 {
+                flex: 1 0 100%;
+            }
+        }
 
-    /* HEADINGS STYLES
-       ------------------------------------
-       Headings should stand out, so we use larger font sizes and adjust line heights.
-       The golden ratio is applied here to scale the font sizes proportionally and create visual harmony.
-    */
-    h1 {
-      font-size: calc(var(--base-font-size) * 2); /* Main heading with a larger font size */
-      line-height: 1.3;
-      margin-bottom: var(--heading-margin); /* Adds margin below the heading for spacing */
-    }
+        h1 {
+            font-size: calc(var(--base-font-size) * 2);
+            line-height: 1.3;
+            margin-bottom: var(--heading-margin);
+        }
 
-    h2 {
-      font-size: calc(var(--base-font-size) * var(--golden-ratio)); /* Scales heading using the golden ratio */
-      line-height: 1.4;
-      margin-top: var(--heading-margin);
-      margin-bottom: var(--heading-margin);
-    }
+        h2 {
+            font-size: calc(var(--base-font-size) * var(--golden-ratio));
+            line-height: 1.4;
+            margin-top: var(--heading-margin);
+            margin-bottom: var(--heading-margin);
+        }
 
-    h3 {
-      font-size: calc(var(--base-font-size) * var(--golden-ratio) / 1.5); /* Smaller headings scaled down using the golden ratio */
-      margin-top: var(--heading-margin);
-      margin-bottom: var(--heading-margin);
-    }
+        h3 {
+            font-size: calc(var(--base-font-size) * var(--golden-ratio) / 1.5);
+            margin-top: var(--heading-margin);
+            margin-bottom: var(--heading-margin);
+        }
 
-    /* PARAGRAPH STYLES
-       ------------------------------------
-       Paragraphs are styled for readability, with appropriate line height and color.
-       Margins below the paragraph provide space between blocks of text.
-    */
-    p {
-      font-size: var(--base-font-size);
-      line-height: var(--line-height);
-      margin-bottom: 1.5em; /* Adds space between paragraphs */
-      color: var(--secondary-color); /* A lighter color for text for a softer look */
-    }
+        p {
+            font-size: var(--base-font-size);
+            line-height: var(--line-height);
+            margin-bottom: 1.5em;
+            color: var(--secondary-color);
+        }
 
-    /* LINKS
-       ------------------------------------
-       Links are styled in a recognizable blue color, and a hover effect is added to underline the link when hovered over.
-    */
-    a {
-      color: var(--link-color);
-      text-decoration: none;
-    }
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
 
-    a:hover {
-      text-decoration: underline; /* Underlines the link on hover to indicate interactivity */
-    }
+        a:hover {
+            text-decoration: underline;
+        }
 
-    /* LIST STYLES (FOR NAVIGATION)
-       ------------------------------------
-       Unordered lists are used for the table of contents. We remove the default bullets and add margin between list items.
-    */
-    nav ul {
-      list-style-type: none; /* Removes bullet points from the list */
-      padding-left: 0; /* Removes default padding */
-    }
+        nav ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
 
-    nav ul li {
-      margin-bottom: 0.75em; /* Adds spacing between list items */
-    }
-  </style>
+        nav ul li {
+            margin-bottom: 0.75em;
+        }
+
+        /* Updated Responsive Navigation Menu */
+        .menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--primary-color);
+            padding: 1em;
+            color: white;
+        }
+
+        .menu a {
+            color: white;
+            padding: 0.5em 1em;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .menu a:hover {
+            background-color: var(--link-color);
+            border-radius: 4px;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 10;
+        }
+
+        .menu-toggle:focus {
+            outline: none;
+        }
+
+        .menu-toggle div {
+            width: 30px;
+            height: 3px;
+            background-color: white;
+            transition: all 0.3s linear;
+            position: relative;
+            transform-origin: 1px;
+        }
+
+        .menu-items {
+            display: flex;
+            gap: 1em;
+        }
+
+        @media (max-width: 768px) {
+            .menu-items {
+                position: fixed;
+                top: 0;
+                right: 0;
+                height: 100vh;
+                width: 300px;
+                flex-direction: column;
+                background-color: var(--primary-color);
+                padding-top: 3.5rem;
+                transition: transform 0.3s ease-in-out;
+                transform: translateX(100%);
+            }
+
+            .menu-items.active {
+                transform: translateX(0);
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .menu-toggle.open div:first-child {
+                transform: rotate(45deg);
+            }
+
+            .menu-toggle.open div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.open div:nth-child(3) {
+                transform: rotate(-45deg);
+            }
+        }
+
+        /* Font Awesome Icons */
+        .fa, .fas {
+            margin-right: 0.5em;
+            width: 20px;  /* Fixed width for better alignment */
+            text-align: center;
+        }
+
+        /* Footer styles */
+        footer {
+            margin-top: 20px;
+            padding: 20px;
+            text-align: center;
+            background-color: var(--primary-color);
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
-  <!-- HEADER: The main title of the page is here. Semantic <header> tags should wrap introductory content. -->
-  <header>
-    <h1>Lesson: Web Design, Typography, and the Mathematics of Web Development</h1>
-    <p><strong>Date:</strong> October 2024</p>
-  </header>
+    <!-- Responsive Menu -->
+    <nav class="menu">
+        <!-- The hamburger menu button -->
+        <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+            <div></div>
+            <div></div>
+            <div></div>
+        </button>
+        <div class="menu-items" id="menuItems">
+            <a href="#"><i class="fas fa-home"></i>Home</a>
+            <a href="#"><i class="fas fa-info-circle"></i>About</a>
+            <a href="#"><i class="fas fa-cogs"></i>Services</a>
+            <a href="#"><i class="fas fa-briefcase"></i>Portfolio</a>
+            <a href="#"><i class="fas fa-envelope"></i>Contact</a>
+        </div>
+    </nav>
 
-  <!-- MAIN CONTENT AREA: Two-column layout using Flexbox -->
-  <main>
-    <!-- PRIMARY CONTENT COLUMN (Main lesson content) -->
-    <article class="column-1">
-      <!-- INTRODUCTION SECTION -->
-      <section id="introduction-to-web-design">
-        <h2>Introduction to Web Design</h2>
-        <p>Welcome to your first lesson in web design! This lesson covers essential concepts you need to build modern, accessible, and responsive web pages. We will focus on semantic HTML, responsive design, accessibility using ARIA, typography, and how mathematical principles like the golden ratio play a role in web design. Understanding these core principles will set you on the path to becoming a skilled web developer.</p>
+    <!-- HEADER -->
+    <header>
+        <h1>Lesson: Web Design, Typography, and the Mathematics of Web Development</h1>
+        <p><strong>Date:</strong> October 2024</p>
+    </header>
 
-        <p>Good web design is about more than just making something look nice. It's about creating a functional, user-friendly experience for all users, regardless of device or ability. This is where concepts like semantic HTML, responsive design, and accessibility come in.</p>
+    <!-- MAIN CONTENT AREA -->
+    <main>
+        <article class="column-1">
+            <section id="introduction-to-web-design">
+                <h2>Introduction to Web Design</h2>
+                <p>Welcome to your first lesson in web design! In this section, we explore the importance of clean and modern web design. Whether you're a beginner or an experienced developer, having a solid understanding of design principles is crucial for creating a user-friendly website. A well-designed site is more than just aesthetics; it's about providing the best experience for users while fulfilling their needs.</p>
+                <p>Good web design combines layout, typography, color schemes, and imagery. As we move forward in this lesson, you'll gain insights into structuring pages effectively, making your content easily accessible, and applying styles that enhance user interaction.</p>
+            </section>
 
-        <p>By the end of this lesson, you will have a solid understanding of how to structure your HTML correctly, make your pages accessible, and ensure they look good on both large and small screens using mathematical principles to create balance and harmony. Let’s dive into the key topics!</p>
-      </section>
+            <section id="understanding-semantic-html">
+                <h2>Understanding Semantic HTML</h2>
+                <p>Semantic HTML refers to using HTML elements for their intended purpose. Instead of relying on `<div>` tags for everything, modern HTML5 introduces elements like `<header>`, `<section>`, and `<footer>`. These elements not only provide structure to your code but also make it easier for search engines and assistive technologies to interpret your content.</p>
+                <p>For example, a search engine could identify a section of your page as a navigation menu if you use the correct `<nav>` tag. This practice improves SEO and accessibility, both of which are vital in today's web landscape. By using semantic HTML, you create cleaner, more readable code that enhances the user experience.</p>
+            </section>
 
-      <!-- SEMANTIC HTML SECTION -->
-      <section id="understanding-semantic-html">
-        <h2>Understanding Semantic HTML</h2>
-        <p>Semantic HTML refers to using HTML elements for their intended purpose. This improves both the readability of the code and the accessibility of your website for users with disabilities. It also helps search engines better understand the structure of your content, which can improve SEO.</p>
+            <section id="aria-and-accessibility">
+                <h2>ARIA and Accessibility</h2>
+                <p>Accessibility is an essential part of web development. Ensuring that all users, regardless of disability, can access your website is both a legal requirement in many countries and a sign of good practice. The Web Accessibility Initiative (WAI) provides standards for making websites accessible through ARIA (Accessible Rich Internet Applications).</p>
+                <p>By adding ARIA attributes to HTML elements, developers can create better experiences for users who rely on screen readers and other assistive technologies. For example, the `aria-label` attribute provides extra context to elements that might not be visually clear. These enhancements help improve the inclusivity of your website.</p>
+            </section>
 
-        <h3>Why is Semantic HTML Important?</h3>
-        <p>Using the right HTML elements for the right job not only makes your page more accessible but also more maintainable and future-proof. For example, instead of using a generic <code>&lt;div&gt;</code> element to mark up navigation, you should use a <code>&lt;nav&gt;</code> tag, which clearly indicates that this is a section for navigation.</p>
+            <section id="responsive-design">
+                <h2>Responsive Design</h2>
+                <p>Responsive design ensures that your website looks great on all screen sizes, from desktop monitors to mobile devices. A responsive website adapts its layout based on the user's device, ensuring optimal readability and usability. This is done through media queries in CSS, which adjust elements based on the screen's width and height.</p>
+                <p>Responsive design is no longer optional—it's a requirement for modern websites. Mobile internet usage has surpassed desktop, meaning that if your site isn't mobile-friendly, you're missing out on a huge audience. Tools like CSS Grid and Flexbox make building responsive layouts easier than ever.</p>
+            </section>
 
-        <p>Some common semantic HTML elements include:</p>
-        <ul>
-          <li><code>&lt;header&gt;</code> - Represents the introductory section of a page.</li>
-          <li><code>&lt;nav&gt;</code> - Used for navigation links.</li>
-          <li><code>&lt;main&gt;</code> - Defines the main content area of a webpage.</li>
-          <li><code>&lt;footer&gt;</code> - Marks the bottom section of the page, often containing site info and links.</li>
-        </ul>
-      </section>
+            <section id="mathematics-in-web-development">
+                <h2>Mathematics in Web Development</h2>
+                <p>Mathematics plays a crucial role in web design, whether you realize it or not. From the golden ratio to grid systems, math is behind many of the decisions designers make. The golden ratio, a mathematical formula often used in design, helps create harmonious proportions that are pleasing to the eye.</p>
+                <p>Additionally, understanding concepts like percentages and ratios is key when working with responsive layouts. Flexbox, for example, uses these principles to distribute space within a container. By leveraging mathematics, you can make more informed decisions about spacing, layout, and element sizing.</p>
+            </section>
 
-      <!-- ARIA AND ACCESSIBILITY SECTION -->
-      <section id="aria-and-accessibility">
-        <h2>ARIA and Accessibility</h2>
-        <p>Accessibility is an essential part of web development. Everyone, including people with disabilities, should be able to access and use your website. ARIA (Accessible Rich Internet Applications) helps enhance the accessibility of your site by making dynamic content and user interface components more accessible to assistive technologies like screen readers.</p>
+            <section id="typography-basics">
+                <h2>Typography Basics</h2>
+                <p>Typography plays a critical role in web design. Choosing the right font can set the tone of your website and make content easier to read. Web-safe fonts like Arial, Helvetica, and Times New Roman are popular choices, but with the advent of web font services like Google Fonts, your choices are virtually unlimited.</p>
+                <p>Typography is about more than just picking a pretty font. Factors like line-height, font size, and letter spacing all contribute to the readability of your text. A well-chosen font can guide the user's eye and enhance the overall experience, so don't underestimate the power of typography in web design.</p>
+            </section>
+        </article>
 
-        <h3>Common ARIA Roles and Attributes</h3>
-        <p>ARIA adds special attributes to HTML elements, improving the experience for users who rely on assistive technologies. Here are some key ARIA roles you should know:</p>
-        <ul>
-          <li><strong>role="banner"</strong> – Defines the header area of a webpage.</li>
-          <li><strong>role="navigation"</strong> – Indicates a navigation region.</li>
-          <li><strong>role="main"</strong> – Marks the primary content area of the page.</li>
-          <li><strong>aria-label</strong> – Adds a label for an element when there isn't a visible label.</li>
-        </ul>
-        <p>Using ARIA attributes correctly improves your site's usability for people with disabilities, and it's often a requirement for compliance with accessibility standards like WCAG (Web Content Accessibility Guidelines).</p>
-      </section>
+        <aside class="column-2">
+            <nav aria-label="Table of Contents">
+                <h2>Table of Contents</h2>
+                <ul>
+                    <li><a href="#introduction-to-web-design"><i class="fas fa-angle-right"></i>Introduction to Web Design</a></li>
+                    <li><a href="#understanding-semantic-html"><i class="fas fa-angle-right"></i>Understanding Semantic HTML</a></li>
+                    <li><a href="#aria-and-accessibility"><i class="fas fa-angle-right"></i>ARIA and Accessibility</a></li>
+                    <li><a href="#responsive-design"><i class="fas fa-angle-right"></i>Responsive Design</a></li>
+                    <li><a href="#mathematics-in-web-development"><i class="fas fa-angle-right"></i>Mathematics in Web Development</a></li>
+                    <li><a href="#typography-basics"><i class="fas fa-angle-right"></i>Typography Basics</a></li>
+                </ul>
+            </nav>
+        </aside>
+    </main>
 
-      <!-- RESPONSIVE DESIGN SECTION -->
-      <section id="responsive-design">
-        <h2>Responsive Design</h2>
-        <p>Responsive design ensures that your website looks great on all screen sizes—from large desktop monitors to small mobile phones. Instead of creating separate sites for mobile and desktop, you create one site that adapts to different screen sizes.</p>
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2024 Web Design for Beginners. All rights reserved. | Follow us: <i class="fab fa-facebook"></i> <i class="fab fa-twitter"></i> <i class="fab fa-instagram"></i></p>
+    </footer>
 
-        <h3>How Does Responsive Design Work?</h3>
-        <p>The core principle behind responsive design is using flexible layouts and media queries. Media queries allow you to apply different styles depending on the screen size.</p>
+    <!-- Updated JavaScript to handle the menu toggle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const menuItems = document.getElementById('menuItems');
 
-        <p>In this example, we're using Flexbox for the layout. On larger screens, the content is divided into two columns. However, when the screen size is smaller than 768px (such as on a phone), we change the layout to a single column.</p>
+            function toggleMenu() {
+                const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+                menuToggle.setAttribute('aria-expanded', !isExpanded);
+                menuToggle.classList.toggle('open');
+                menuItems.classList.toggle('active');
+                
+                // Prevent scrolling when menu is open
+                document.body.style.overflow = isExpanded ? 'visible' : 'hidden';
+            }
 
-        <pre><code>@media (max-width: 768px) {
-  main {
-    flex-direction: column; /* Stack columns vertically */
-  }
-}</code></pre>
+            menuToggle.addEventListener('click', toggleMenu);
 
-        <p>This media query detects when the screen width is less than 768px and then stacks the columns on top of each other. This ensures that your site is mobile-friendly, meaning it looks good and is easy to navigate on small screens.</p>
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                const isClickInside = menuItems.contains(event.target) || menuToggle.contains(event.target);
+                if (!isClickInside && menuItems.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
 
-        <h3>Best Practices for Responsive Design</h3>
-        <ul>
-          <li>Use relative units like percentages, ems, or rems for widths and spacing instead of fixed pixel values.</li>
-          <li>Design mobile-first by creating layouts for smaller screens first, then enhancing them for larger screens.</li>
-          <li>Test your design on different screen sizes using browser tools or responsive design testing tools.</li>
-        </ul>
-      </section>
+            // Close menu when pressing Escape key
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && menuItems.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
 
-      <!-- MATHEMATICS IN WEB DEVELOPMENT SECTION -->
-      <section id="mathematics-in-web-development">
-        <h2>Mathematics in Web Development</h2>
-        <p>Mathematics plays a crucial role in web design, particularly when it comes to layout, spacing, and typography. By using mathematical principles like the golden ratio, you can create visually appealing and well-balanced designs.</p>
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768 && menuItems.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+    </script>
 
-        <h3>What is the Golden Ratio?</h3>
-        <p>The golden ratio is a mathematical ratio commonly found in nature and art. It's approximately 1.618, and it has been used by artists, architects, and designers for centuries to create aesthetically pleasing compositions. In web design, the golden ratio can help create a harmonious relationship between elements like text and images.</p>
-
-        <p>The formula for the golden ratio is often expressed as: <strong>A/B = (A+B)/A</strong>, which simplifies to approximately 1.618. This means that the larger part (A) is roughly 1.618 times the size of the smaller part (B).</p>
-
-        <h3>Using the Golden Ratio in Layouts</h3>
-        <p>In web design, you can use the golden ratio to define proportions between elements. For example, if you're designing a two-column layout, one column can be 65% of the width, and the other can be 35% (since 65/35 = 1.618).</p>
-
-        <h3>Applying the Golden Ratio to Typography</h3>
-        <p>Typography can also benefit from the golden ratio. You can scale font sizes proportionally by multiplying the base font size by the golden ratio (1.618). For example, if your base font size is 18px, the next level up (for a heading) would be 18px * 1.618 ≈ 29px. This creates a natural hierarchy that is pleasing to the eye.</p>
-
-        <h3>Other Mathematical Principles in Web Design</h3>
-        <ul>
-          <li><strong>Rule of Thirds:</strong> This principle divides a design into three equal parts horizontally and vertically, helping to place key elements along these lines or intersections for balance and focus.</li>
-          <li><strong>Modular Scales:</strong> These are predetermined sets of values (often based on a ratio like 1.5 or the golden ratio) used to scale font sizes, spacing, or other elements in a harmonious way.</li>
-          <li><strong>Grid Systems:</strong> Grids are used to organize content in a way that is both logical and aesthetically pleasing. Grids often follow a 12-column layout, allowing for flexible design options that still maintain structure.</li>
-        </ul>
-      </section>
-
-      <!-- TYPOGRAPHY SECTION -->
-      <section id="typography-basics">
-        <h2>Typography Basics</h2>
-        <p>Typography plays a critical role in web design. It affects how readable your content is and can influence the overall aesthetic of your site. Good typography helps users easily read and digest information.</p>
-
-        <h3>1. Font Size</h3>
-        <p>A base font size of 16px to 18px is generally recommended for body text. For headings, use a typographic scale where the font size increases as the heading level goes up (e.g., h1 is larger than h2).</p>
-
-        <h3>2. Line Height</h3>
-        <p>Line height controls the space between lines of text. A line height of 1.5 to 1.6 is considered ideal for readability. It gives enough space between lines to avoid overcrowding.</p>
-
-        <h3>3. Font Choices</h3>
-        <p>Stick to web-safe fonts like Arial, Verdana, or Georgia for maximum compatibility across devices. You can also use Google Fonts for more variety, but make sure the fonts you choose are easy to read, especially for longer texts.</p>
-      </section>
-    </article>
-
-    <!-- SECONDARY CONTENT COLUMN (Table of contents) -->
-    <aside class="column-2">
-      <nav aria-label="Table of Contents">
-        <h2>Table of Contents</h2>
-        <ul>
-          <li><a href="#introduction-to-web-design">Introduction to Web Design</a></li>
-          <li><a href="#understanding-semantic-html">Understanding Semantic HTML</a></li>
-          <li><a href="#aria-and-accessibility">ARIA and Accessibility</a></li>
-          <li><a href="#responsive-design">Responsive Design</a></li>
-          <li><a href="#mathematics-in-web-development">Mathematics in Web Development</a></li>
-          <li><a href="#typography-basics">Typography Basics</a></li>
-        </ul>
-      </nav>
-    </aside>
-  </main>
-
-  <!-- FOOTER: Closing information for the page -->
-  <footer>
-    <p>&copy; 2024 Web Design for Beginners. All rights reserved.</p>
-  </footer>
 </body>
 
 </html>
